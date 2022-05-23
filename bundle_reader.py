@@ -5,6 +5,7 @@ from bundle_reader_1 import bundle_reader_1
 
 
 def bundle_reader(link1):
+    # print(link1)
     # [*] Detect all files in directory
     allfiles = os.listdir('./downloads')
     for j in allfiles:
@@ -12,25 +13,27 @@ def bundle_reader(link1):
         if j.endswith(".js"):
             file = open('./downloads/' + j, encoding='utf-8')
             # [*] It is the pattern that we will be searching for
-            start = '""+({'
+            start = 'u=e=>(({'
             end = '.js"'
             # [*] Read the content of the file opened
             content = file.read()
             # [*] Try to find the pattern in js file
             ind_start = content.find(start)
             ind_end = content.find(end)
+            # print(ind_start, ind_end)
             # [*] These to variables are needed to remove everything before { and after }
-            bracket_1 = '{'
-            bracket_2 = '}'
+            b1 = '{'
+            b2 = '}'
             # [*] Create array from ind_start to ind_end
             arr = content[ind_start:ind_end]
-            arr = arr[arr.find(bracket_1) + 1:arr[:ind_end].rfind(bracket_2)].replace('"', "")
-            farr = arr[:arr.find(bracket_2)]
-            sarr = arr[arr.find(bracket_1) + 1:]
+            arr = arr[arr.find(b1) + 1:arr[:ind_end].rfind(b2)].replace('"', "")
+            farr = arr[:arr.find(b2)]
+            sarr = arr[arr.find(b1) + 1:]
             farr = farr.split(',')
             sarr = sarr.split(',')
             js_urls = []
-            # print(arr)
+            # print(farr)
+            # print(sarr)
             if len(arr) == 0:
                 continue
             k_arr = []
@@ -74,5 +77,5 @@ def bundle_reader(link1):
             #     print('404 ERROR')
             # return js_urls
 
-
+#
 # bundle_reader('https://wolt.com')

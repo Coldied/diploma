@@ -6,6 +6,7 @@ from bundle_reader_1 import bundle_reader_1
 
 # [*] Loop through the list of the js urls
 def js_downloader(array, link):
+    # print(link)
     count = 0
     for i in array:
         # if i[-1] != '/':
@@ -18,6 +19,7 @@ def js_downloader(array, link):
             # print(i)
             # [*] Remove all staff except the name of the file
             filename = url.rsplit('/', 1)[1].rsplit('?', 1)[0]
+            # print(url)
             print('[+] Downloading %s' % filename)
             # print(filename)
             try:

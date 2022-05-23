@@ -1,4 +1,4 @@
-import os, time, urllib3
+import os, time, urllib3, platform
 import requests
 from selenium import webdriver
 from bs4 import BeautifulSoup
@@ -11,16 +11,16 @@ from js_downloader import js_downloader
 from bundle_reader_1 import bundle_reader_1
 from bundle_reader_2 import bundle_reader_2
 from remove_html import remove_html
-
+from Scanner.api import search_regex
 
 # -------------[LINKS]----------------
-# link = 'https://realestate-sales-mf.bi.group/'
+link = 'https://realestate-sales-mf.bi.group/'
 # link = 'https://www.mechta.kz/'
 # link = 'https://www.technodom.kz/'
 # link = 'https://alser.kz/'
 # link = 'https://www.chocotravel.com/'
 # link = 'https://wolt.com/ru/kaz'
-link = 'https://www.gov.kz/'
+# link = 'https://www.gov.kz/'
 # ------------------------------------
 
 
@@ -51,8 +51,8 @@ link = cleaner(link)
 os.makedirs("downloads", exist_ok=True)
 
 # [*] Clear directory if existed before
-for i in os.listdir('./downloads'):
-    os.remove(os.path.join('./downloads', i))
+for i in os.listdir('downloads'):
+    os.remove(os.path.join('downloads', i))
 
 # [*] Disable checking HTTPS certificates
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -73,14 +73,16 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 #     soup = BeautifulSoup(fp, 'html.parser')
 
 # [*] Choose which chromedriver according to your OS
-s = Service('./chromedriver_linux64/chromedriver')
-# s = Service('./chromedriver_win/chromedriver.exe')
+if platform.system() == 'Windows':
+    s = Service('./chromedriver_win/chromedriver.exe')
+else:
+    s = Service('./chromedriver_linux64/chromedriver')
 
 options = webdriver.ChromeOptions()
 print('[*] Opening the website...')
-# options.add_argument('--headless')
-# driver = webdriver.Chrome(service=s, options=options)
-driver = webdriver.Chrome(service=s)
+options.add_argument('--headless')
+driver = webdriver.Chrome(service=s, options=options)
+# driver = webdriver.Chrome(service=s)
 
 # [*] Handling error with opening the link
 try:
@@ -108,25 +110,34 @@ for i in range(len(js_url)):
             link = cleaner(js_url[i])
             # print(link)
 # [*] Download the available js files from the webpage
+print('Downloading js files from main page')
+print('-----------------------------------')
 js_downloader(js_url, link)
 
 # [*] Download all js files from the bundle
 chunk_url = bundle_reader(link)
 chunk_url_1 = bundle_reader_1(link)
 chunk_url_2 = bundle_reader_2(link)
+
 # [*] If there is some links, download them
+print('Downloading js files from main bundle')
+print('-----------------------------------')
 if chunk_url is not None:
     js_downloader(chunk_url, link)
 if chunk_url_1 is not None:
     js_downloader(chunk_url_1, link)
 if chunk_url_2 is not None:
     js_downloader(chunk_url_2, link)
-# print('Chunks', chunk_url)
-# print('Chunks_1', chunk_url_1)
-# print('Chunks_2', chunk_url_2)
 
 # [*] Delete all files, which are not js
+print('Cleaning unnecessary stuff')
 remove_html()
+
 # [*] Close browser
 driver.close()
+
+# [*] Regex
+print('Searching for interesting things...')
+search_regex()
+
 print("Finished!!!. Look in /downloads folder for .js files")

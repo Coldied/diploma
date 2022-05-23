@@ -14,13 +14,13 @@ from remove_html import remove_html
 from Scanner.api import search_regex
 
 # -------------[LINKS]----------------
-link = 'https://realestate-sales-mf.bi.group/'
+# link = 'https://realestate-sales-mf.bi.group/'
 # link = 'https://www.mechta.kz/'
 # link = 'https://www.technodom.kz/'
 # link = 'https://alser.kz/'
 # link = 'https://www.chocotravel.com/'
 # link = 'https://wolt.com/ru/kaz'
-# link = 'https://www.gov.kz/'
+link = 'https://www.gov.kz/'
 # ------------------------------------
 
 
@@ -80,9 +80,9 @@ else:
 
 options = webdriver.ChromeOptions()
 print('[*] Opening the website...')
-options.add_argument('--headless')
-driver = webdriver.Chrome(service=s, options=options)
-# driver = webdriver.Chrome(service=s)
+# options.add_argument('--headless')
+# driver = webdriver.Chrome(service=s, options=options)
+driver = webdriver.Chrome(service=s)
 
 # [*] Handling error with opening the link
 try:

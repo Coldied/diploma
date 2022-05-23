@@ -64,13 +64,11 @@ def search_regex():
             dictionary.pop(i)
     # for js in allfiles:
     d4 = date.today().strftime("%b-%d-%Y")
-    with open(f'..\\Results\\{d4}.csv', 'w+', encoding='utf-8') as output:
+    os.chdir('../Results')
+    with open(f'{d4}.csv', 'w+', encoding='utf-8') as output:
         writer = csv.writer(output)
         for key, value in dictionary.items():
             writer.writerow([key, value])
     import pandas as pd
     df = pd.DataFrame(data=dictionary)
-    df.to_excel(f"..\\Results\\{d4}.xlsx", index=True)
-
-
-# search_regex()
+    df.to_excel(f"{d4}.xlsx", index=True)

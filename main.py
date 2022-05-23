@@ -80,9 +80,9 @@ else:
 
 options = webdriver.ChromeOptions()
 print('[*] Opening the website...')
-# options.add_argument('--headless')
-# driver = webdriver.Chrome(service=s, options=options)
-driver = webdriver.Chrome(service=s)
+options.add_argument('--headless')
+driver = webdriver.Chrome(service=s, options=options)
+# driver = webdriver.Chrome(service=s)
 
 # [*] Handling error with opening the link
 try:

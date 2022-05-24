@@ -7,9 +7,9 @@ regex_api = r"\W[\/\"':]*(api)\W[\/\"':]*"
 regex_admin = r"[\/\"'_](admin)[\/\"'_]"
 regex_links = r'''https?://(?!twitter.com|www.facebook.com|fb.me|vk.com
 |www.google|www.w3.org|reactjs.org|npms.io|www.instagram)(?:[-\w.]|(?:%[\da-fA-F]{2}))+'''
-regex_common_words = r''''''
+regex_common_words = r'''(password|passwd)'''
 # accessToken, token, access_Token, secret
-regex_token = ''''''
+regex_token = r'''(accessToken|token|access_Token|secret)'''
 
 
 def search_regex():
@@ -24,7 +24,8 @@ def search_regex():
                 'api': [],
                 'admin': [],
                 'links': [],
-                'default credentials': []
+                'default credentials': [],
+                'token': []
             }
     for i in allfiles:
         if i.endswith('js'):
@@ -51,7 +52,11 @@ def search_regex():
             # list_of_links = set
             dictionary[i]['links'] = matches
             dictionary[i]['admin'] = list_of_admin
-
+            matches = re.findall(regex_common_words, content)
+            matches = list(dict.fromkeys(matches))
+            dictionary[i]['default credentials'] = matches
+            matches = re.findall(regex_token, content)
+            dictionary[i]['token'] = matches
             if content.find('jquery') != -1:
                 print(i)
             # print(dictionary[i])
@@ -60,7 +65,8 @@ def search_regex():
         if (dictionary[i]['api'] == [] or dictionary[i]['api'] == [''] )\
                 and dictionary[i]['admin'] == []\
                 and dictionary[i]['links'] == []\
-                and dictionary[i]['default credentials'] == []:
+                and dictionary[i]['default credentials'] == []\
+                and dictionary[i]['token'] == []:
             dictionary.pop(i)
     # for js in allfiles:
     d4 = date.today().strftime("%b-%d-%Y")

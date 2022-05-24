@@ -1,16 +1,13 @@
 import os, time, urllib3, platform
-import requests
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-from fake_useragent import UserAgent
 from selenium.common.exceptions import WebDriverException
-from bundle_reader import bundle_reader
-from js_downloader import js_downloader
-from bundle_reader_1 import bundle_reader_1
-from bundle_reader_2 import bundle_reader_2
-from remove_html import remove_html
+from debundle.bundle_reader import bundle_reader
+from js.js_downloader import js_downloader
+from debundle.bundle_reader_1 import bundle_reader_1
+from debundle.bundle_reader_2 import bundle_reader_2
+from js.remove_html import remove_html
 from Scanner.api import search_regex
 
 # -------------[LINKS]----------------

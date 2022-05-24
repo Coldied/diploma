@@ -37,7 +37,7 @@ def search_regex():
                 index_of_keyword = match.start()
                 temp = content[1 + content.rfind(' ', 0, index_of_keyword):content.find(' ', index_of_keyword)]
                 if len(temp) > 50:
-                    temp = content[index_of_keyword-20:index_of_keyword+25]
+                    temp = content[index_of_keyword-15:index_of_keyword+15]
                 list_of_api.append(temp)
             dictionary[i]['api'] = list_of_api
             matches = re.finditer(regex_admin, content, re.MULTILINE)

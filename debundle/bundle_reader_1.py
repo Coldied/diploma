@@ -1,6 +1,4 @@
 import os
-import requests
-from fake_useragent import UserAgent
 
 
 def bundle_reader_1(link1):
@@ -58,12 +56,4 @@ def bundle_reader_1(link1):
                     js_urls[i] = link1 + '/static/js/' + js_urls[i]
             except IndexError:
                 continue
-            # print(js_urls)
-            # try:
-            #     ua = UserAgent()
-            #     header = {'User-Agent': str(ua.chrome)}
-            #     req = requests.get(js_urls[0], allow_redirects=True, verify=False, headers=header)
-            #     print(req.status_code)
-            # except requests.HTTPError:
-            #     print('404 ERROR')
             return js_urls

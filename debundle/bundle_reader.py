@@ -1,7 +1,4 @@
 import os
-import requests
-from fake_useragent import UserAgent
-from bundle_reader_1 import bundle_reader_1
 
 
 def bundle_reader(link1):
@@ -68,14 +65,3 @@ def bundle_reader(link1):
                 js_urls[i] = link1 + js_urls[i]
             # print(js_urls)
             return js_urls
-            # try:
-            #     ua = UserAgent()
-            #     header = {'User-Agent': str(ua.chrome)}
-            #     req = requests.get(js_urls[0], allow_redirects=True, verify=False, headers=header)
-            #     print(req.status_code)
-            # except requests.HTTPError:
-            #     print('404 ERROR')
-            # return js_urls
-
-#
-# bundle_reader('https://wolt.com')

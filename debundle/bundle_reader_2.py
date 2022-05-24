@@ -20,7 +20,8 @@ def bundle_reader_2(link):
             try:
                 for i in bundle:
                     first_part = i.split(":")
-                    chunk_list.append(link + "/static/js/" + "chunk-" + first_part[0] + "." + first_part[1][1:-1] + ".js")
+                    chunk_list.append(link + "/static/js/" + "chunk-" + first_part[0]
+                                      + "." + first_part[1][1:-1] + ".js")
             except IndexError:
                 continue
             return chunk_list

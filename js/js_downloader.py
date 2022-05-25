@@ -1,6 +1,6 @@
 import requests
 from fake_useragent import UserAgent
-from move_js import move_js
+from js.move_js import move_js
 
 
 # [*] Loop through the list of the js urls

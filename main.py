@@ -115,7 +115,6 @@ js_downloader(js_url, link)
 chunk_url = bundle_reader(link)
 chunk_url_1 = bundle_reader_1(link)
 chunk_url_2 = bundle_reader_2(link)
-
 # [*] If there is some links, download them
 print('Downloading js files from main bundle')
 print('-----------------------------------')

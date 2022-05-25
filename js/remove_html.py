@@ -2,7 +2,7 @@ import os
 
 
 def remove_html():
-    path = '../downloads/'
+    path = './downloads/'
     allfiles = os.listdir(path)
     # print(allfiles)
     for i in allfiles:
@@ -11,4 +11,4 @@ def remove_html():
         file.close()
         string = '<!doctype'
         if string in content:
-            os.remove(os.path.join('../downloads', i))
+            os.remove(os.path.join('./downloads', i))

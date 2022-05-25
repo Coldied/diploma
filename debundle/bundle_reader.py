@@ -2,9 +2,8 @@ import os
 
 
 def bundle_reader(link1):
-    # print(link1)
     # [*] Detect all files in directory
-    allfiles = os.listdir('../downloads')
+    allfiles = os.listdir('./downloads')
     for j in allfiles:
         # [*] If extension is .js then:
         if j.endswith(".js"):
@@ -63,5 +62,4 @@ def bundle_reader(link1):
                 js_urls.append(i.split(':')[0] + '.' + i.split(':')[1] + '.js')
             for i in range(len(js_urls)):
                 js_urls[i] = link1 + js_urls[i]
-            # print(js_urls)
             return js_urls

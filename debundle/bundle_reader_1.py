@@ -3,7 +3,7 @@ import os
 
 def bundle_reader_1(link1):
     # open the sample file used
-    allfiles = os.listdir('../downloads')
+    allfiles = os.listdir('./downloads')
     for j in allfiles:
         # If extension is .js then
         if j.endswith(".js"):
